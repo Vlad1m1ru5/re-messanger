@@ -1,36 +1,41 @@
 import { v4 } from "uuid";
 
-const timeout = 20_000;
-const uidToValue = {};
+class CalculatorService {
+  #timeout = 1;
+  #uidToValue = {};
 
-export function createUid() {
-  return v4();
-}
+  constructor(timeout, uidToValue) {
+    this.#timeout = timeout;
+    this.#uidToValue = uidToValue;
+  }
 
-export function saveUid(uid) {
-  uidToValue[uid] = null;
-}
+  createUid() {
+    return v4();
+  }
 
-export function hasUid(uid) {
-  return Object.keys(uidToValue).includes(uid);
-}
+  saveUid(uid) {
+    this.#uidToValue[uid] = null;
+  }
 
-export function getValueByUid(uid) {
-  return uidToValue[uid];
-}
+  hasUid(uid) {
+    return Object.keys(this.#uidToValue).includes(uid);
+  }
 
-export function setValueByUid(uid) {
-  console.log("start");
+  getValueByUid(uid) {
+    return this.#uidToValue[uid];
+  }
 
-  setTimeout(() => {
-    console.log("finish");
+  setValueByUid(uid) {
+    setTimeout(() => {
+      this.#uidToValue[uid] = Date.now();
+    }, this.#timeout);
+  }
 
-    uidToValue[uid] = Date.now();
-  }, timeout);
-}
-
-export function removeValueByUid(uid) {
-  if (uidToValue.hasOwnProperty(uid)) {
-    delete uidToValue[uid];
+  removeValueByUid(uid) {
+    if (this.#uidToValue.hasOwnProperty(uid)) {
+      delete this.#uidToValue[uid];
+    }
   }
 }
+
+export default new CalculatorService(20_000, {});

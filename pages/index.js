@@ -1,4 +1,4 @@
-import { Button, Col, Layout, message, Row, Typography } from 'antd';
+import { Button, Col, Layout, message, Row, Space, Typography } from 'antd';
 import React from 'react';
 
 const timeout = 10;
@@ -45,8 +45,10 @@ export default function Home() {
       <Layout.Content>
         <Row justify='center'>
           <Col>
-            <Button onClick={handleClick}>Subscribe</Button>
-            {!!error && <Typography>{error}</Typography>}
+            <Space direction='vertical'>
+              <Button onClick={handleClick}>Subscribe</Button>
+              {!!error && <Typography>{error}</Typography>}
+            </Space>
           </Col>
         </Row>
       </Layout.Content>

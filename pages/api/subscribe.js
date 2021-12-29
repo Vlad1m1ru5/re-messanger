@@ -1,4 +1,4 @@
-import * as calculatorService from "../../services/calculator.service";
+import calculatorService from "services/calculator.service";
 
 /** @type {import("next").NextApiHandler} */
 export default function subscribeHandler(req, res) {
