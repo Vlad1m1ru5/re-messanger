@@ -1,0 +1,11 @@
+.ant-layout {
+  min-height: 100vh;
+}
+
+.ant-layout-content {
+  height: 100%;
+}
+
+.ant-row.ant-row-center {
+  margin-top: 6rem;
+}
