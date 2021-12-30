@@ -9,7 +9,7 @@ class CalculatorService {
     this.#uidToValue = uidToValue;
   }
 
-  createUid() {
+  getUid() {
     return v4();
   }
 

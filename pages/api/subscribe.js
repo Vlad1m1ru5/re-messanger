@@ -2,14 +2,16 @@ import calculatorService from "services/calculator.service";
 
 /** @type {import("next").NextApiHandler} */
 export default function subscribeHandler(req, res) {
-  const uid = calculatorService.createUid();
-
-  if (calculatorService.hasUid(uid)) {
-    return res.status(200).json({ uid });
+  if (req.method !== "GET") {
+    return res.status(405).end();
   }
 
-  calculatorService.saveUid(uid);
-  calculatorService.setValueByUid(uid);
-  
+  const uid = calculatorService.getUid();
+
+  if (!calculatorService.hasUid(uid)) {
+    calculatorService.saveUid(uid);
+    calculatorService.setValueByUid(uid);
+  }
+
   return res.status(200).json({ uid });
 }
